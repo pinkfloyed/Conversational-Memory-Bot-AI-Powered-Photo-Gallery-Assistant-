@@ -1,0 +1,16 @@
+# Ignore virtual environments
+.venv/
+venv/
+
+# Ignore ChromaDB storage directory
+chromadb_dir/
+
+# Ignore dynamically generated directories for uploaded images, chat history, and object detection outputs
+/static/uploads/
+/static/history/
+/static/outputs/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
