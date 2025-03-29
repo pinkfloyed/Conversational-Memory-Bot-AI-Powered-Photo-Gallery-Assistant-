@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery View</title>
+
+    <!-- Bootstrap CSS for Styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static_files/style.css">
+
+    <!-- FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #495057;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/" style="font-size: 1.5rem; font-weight: bold;">
+                <img src="/static_files/logo.jpg" style="height: 40px; margin-right: 10px;">Conversational Memory Bot
+            </a>
+
+            <!-- Navbar Toggler for Mobile View -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" style="font-size: 1.2rem;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gallery_page" style="font-size: 1.2rem;">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/batch_upload_page" style="font-size: 1.2rem;">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/image_view" style="font-size: 1.2rem;">Viewer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chat" style="font-size: 1.2rem;">Chat</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container text-center">
+            <h1 class="display-4 text-light">Explore Your Gallery 📸</h1>
+            <p class="lead text-light">Browse and manage all your uploaded images seamlessly.</p>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <section class="container mt-5 text-center">
+        <div id="gallery-container" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;">
+            <!-- Images will be dynamically loaded here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center py-3 mt-5">
+        <p>&copy; 2025 Photo Gallery AI | All Rights Reserved</p>
+        <a href="#" class="text-light me-3">📱</a>
+        <a href="#" class="text-light me-3">🐦</a>
+        <a href="#" class="text-light me-3"> 📷</a>
+
+    </footer>
+
+    <!-- Bootstrap JS for Navbar Toggle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dynamic Image Loading Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() {
+            const galleryContainer = document.getElementById("gallery-container");
+            galleryContainer.innerHTML = '';
+
+            try {
+                const response = await fetch("/gallery");
+                const data = await response.json();
+
+                if (data.images && data.images.length > 0) {
+                    data.images.forEach(imagePath => {
+                        const filename = imagePath.split('/').pop();
+
+                        const imgContainer = document.createElement("div");
+                        imgContainer.style = "position: relative; cursor: pointer;";
+
+                        const imgElement = document.createElement("img");
+                        imgElement.src = imagePath;
+                        imgElement.alt = "Uploaded Image";
+                        imgElement.style = "width: 100%; height: 200px; object-fit: cover; border-radius: 10px;";
+
+                        const linkElement = document.createElement("a");
+                        linkElement.href = `/image_view_page?img=${encodeURIComponent(filename)}`;
+                        linkElement.appendChild(imgElement);
+
+                        imgContainer.appendChild(linkElement);
+                        galleryContainer.appendChild(imgContainer);
+                    });
+                } else {
+                    galleryContainer.innerHTML = "<p>No images uploaded yet. 🤷‍♀️</p>";
+
+                }
+            } catch (error) {
+                console.error("Error loading images:", error);
+                galleryContainer.innerHTML = "<p>Error loading images. 😞</p>";
+            }
+        });
+    </script>
+</body>
+</html>

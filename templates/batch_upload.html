@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batch Upload</title>
+    <link rel="stylesheet" href="/static_files/style.css">
+    <title>Conversational Memory Bot</title>
+
+    <!-- Bootstrap CSS for Better Styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static_files/style.css">
+
+    <!-- FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        #loader {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #message {
+            margin-top: 20px;
+        }
+
+        #message img {
+            max-width: 200px;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .img-area {
+            margin-bottom: 20px;
+            padding: 40px;
+            border: 2px dashed #3498db;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .img-area i {
+            font-size: 40px;
+            color: #3498db;
+        }
+
+        .img-area h3 {
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .img-area p {
+            color: #777;
+        }
+
+        form input[type="file"] {
+            margin: 20px 0;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        form button {
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        form button:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .result img {
+            max-width: 300px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #495057;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/" style="font-size: 1.5rem; font-weight: bold;">
+                <img src="/static_files/logo.jpg" style="height: 40px; margin-right: 10px;">
+               Conversational Memory Bot
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" style="font-size: 1.2rem;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gallery_page" style="font-size: 1.2rem;">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/batch_upload_page" style="font-size: 1.2rem;">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/image_view" style="font-size: 1.2rem;">Viewer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chat" style="font-size: 1.2rem;">Chat</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+    <div class="container text-center">
+        <h1 class="display-4 text-light">Upload Image ☁️</h1>
+        <p class="lead text-light">Upload a new image to the gallery.</p>
+        <a href="/batch_upload_page" class="btn btn-primary btn-lg mt-3">Upload Your Photos 📸</a>
+    </div>
+</header>
+
+
+    <main>
+        <div class="container">
+            <form id="upload-form" enctype="multipart/form-data">
+                <div class="img-area">
+                    <i class="fa fa-cloud-upload"></i>
+                    <h3>Drag & Drop or Browse to select files 🖼️</h3>
+                    <p>Accepted formats: PNG, JPG, JPEG 📂</p>
+                </div>
+
+                <input type="file" name="files" id="file-input" multiple>
+                <button type="submit">Upload</button>
+            </form>
+
+            <div id="loader">
+                <img src="https://i.gifer.com/4V0b.gif" alt="Loading..." width="50" height="50">
+                <p>Uploading...</p>
+            </div>
+
+            <div id="message"></div>
+        </div>
+    </main>
+
+   <footer class="bg-dark text-light text-center py-3 mt-5">
+    <p>&copy; 2025 Conversational Memory Bot | All Rights Reserved 📅</p>
+       <a href="#" class="text-light me-3">📱</a>
+        <a href="#" class="text-light me-3">🐦</a>
+        <a href="#" class="text-light me-3"> 📷</a>
+</footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const uploadForm = document.getElementById("upload-form");
+
+            uploadForm.addEventListener("submit", async function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(uploadForm);
+                const loader = document.getElementById("loader");
+                const messageDiv = document.getElementById("message");
+                loader.style.display = "block";  // Show loader while uploading
+                messageDiv.innerHTML = "";  // Clear any previous messages
+
+                try {
+                    const response = await fetch("/batch_upload", {
+                        method: "POST",
+                        body: formData,
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                    messageDiv.innerHTML = `<p style="color: green;">✅ ${data.message}</p>`;
+                    // Display the uploaded images (optional)
+                    data.file_paths.forEach(function(filePath) {
+                        const uploadedImage = document.createElement("img");
+                        uploadedImage.src = filePath;
+                        uploadedImage.alt = "Uploaded Image";
+                        messageDiv.appendChild(uploadedImage);
+                    });
+
+                    // Redirect to the gallery page after 3 seconds
+                    setTimeout(function() {
+                        window.location.href = "/gallery_page";
+                    }, 5000);
+                } else {
+                    messageDiv.innerHTML = `<p style="color: red;">❌ Image upload failed. Please try again.</p>`;
+                }
+
+                } catch (error) {
+                    console.error("Error uploading image:", error);
+                    messageDiv.innerHTML = `<p style="color: red;">Error uploading image. Please try again later.</p>`;
+                } finally {
+                    loader.style.display = "none";  // Hide loader after upload
+                }
+            });
+        });
+    </script>
+</body>
+</html>

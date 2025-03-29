@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Image</title>
+
+    <!-- Bootstrap CSS for Styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static_files/style.css">
+
+    <!-- FontAwesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* CSS for smooth zooming */
+        .zoomable-image {
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .metadata {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .metadata h3 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .metadata p {
+            margin-bottom: 10px;
+        }
+
+        .detected-objects {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .detected-objects ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detected-objects li {
+            margin-bottom: 8px;
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+    </style>
+    <script defer src="/static_files/script.js"></script>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #495057;">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="/" style="font-size: 1.5rem; font-weight: bold;">
+            <img src="/static_files/logo.jpg" style="height: 40px; margin-right: 10px;">
+            Conversational Memory Bot
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/" style="font-size: 1.2rem;">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/gallery_page" style="font-size: 1.2rem;">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="/batch_upload_page" style="font-size: 1.2rem;">Upload</a></li>
+                <li class="nav-item"><a class="nav-link" href="/image_view" style="font-size: 1.2rem;">Viewer</a></li>
+                <li class="nav-item"><a class="nav-link" href="/chat" style="font-size: 1.2rem;">Chat</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<header class="text-center mt-5">
+    <h1>View Image 📸</h1>
+</header>
+<section class="container mt-4">
+    <div class="row">
+        <!-- Image Column -->
+        <div class="col-lg-8 text-center">
+            {% if output_image_path %}
+                <img id="zoomImage" src="{{ output_image_path }}" alt="{{ filename }}" class="img-fluid zoomable-image mb-4">
+            {% else %}
+                <div class="alert alert-warning">Image not available</div>
+            {% endif %}
+        </div>
+
+        <!-- Metadata Column -->
+        <div class="col-lg-4">
+            <!-- Metadata Section -->
+            <div class="metadata">
+                <h3>Image Metadata 📝</h3>
+                <p><strong>Filename:</strong> {{ filename }}</p>
+                <p><strong>Description:</strong> {{ metadata.description }}</p>
+                <p><strong>Image Width:</strong> {{ metadata.image_width }}</p>
+                <p><strong>Image Height:</strong> {{ metadata.image_height }}</p>
+                <p><strong>File Size:</strong> {{ metadata.file_size }}</p>
+                <p><strong>Image Format:</strong> {{ metadata.image_format }}</p>
+                <p><strong>Timestamp:</strong> {{ metadata.timestamp }}</p>
+            </div>
+
+            <!-- Detected Objects Section -->
+            <div class="detected-objects mt-4">
+                <h3>Detected Objects 🔍</h3>
+                <ul class="list-unstyled">
+                    {% if detected_objects %}
+                        {% for obj in detected_objects %}
+                            <li class="mb-2">
+                                <span class="badge bg-primary">{{ obj.label }}</span>
+                                {% if obj.confidence is not none %}
+                                    <small class="text-muted">(Confidence: {{ "%.2f"|format(obj.confidence) }})</small>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li>No objects detected</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-3 mt-5">
+    <p>&copy; 2025 Conversational Memory Bot | All Rights Reserved 📅</p>
+    <div class="social-links">
+        <a href="#" class="text-light me-3">📱</a>
+        <a href="#" class="text-light me-3">🐦</a>
+        <a href="#" class="text-light me-3">📷</a>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // JavaScript for Mouse Wheel Zoom
+    let zoomLevel = 1;
+    const zoomImage = document.getElementById('zoomImage');
+    const MAX_ZOOM = 3;
+    const MIN_ZOOM = 0.5;
+    const ZOOM_SPEED = 0.1;
+
+    zoomImage.addEventListener('wheel', (event) => {
+        event.preventDefault();
+
+        // Calculate new zoom level
+        const delta = event.deltaY > 0 ? -ZOOM_SPEED : ZOOM_SPEED;
+        zoomLevel = Math.min(Math.max(zoomLevel + delta, MIN_ZOOM), MAX_ZOOM);
+
+        // Apply zoom
+        zoomImage.style.transform = `scale(${zoomLevel})`;
+    });
+
+    // Reset zoom on double click
+    zoomImage.addEventListener('dblclick', () => {
+        zoomLevel = 1;
+        zoomImage.style.transform = 'scale(1)';
+    });
+</script>
+
+</body>
+</html>
