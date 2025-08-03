@@ -1,57 +1,57 @@
-# Conversational Memory Bot – AI-Powered Photo Gallery Assistant
+# 📸 Conversational Memory Bot – AI-Powered Photo Gallery Assistant
 
-## Overview
+## 📝 Overview
 Conversational Memory Bot is an AI-powered chatbot designed to revolutionize the way users interact with their personal photo galleries. By integrating advanced Natural Language Processing (NLP) and AI-driven visual recognition, this system enables users to query, retrieve, and explore their photos using natural language and visual features.
 
 ---
 
-## Features
-### 1. Natural Language Querying
+## ✨ Features
+### 1️⃣ Natural Language Querying
 - Users can search their photo gallery with natural language queries like:
   - "Show me wedding images from my gallery."
 
-### 2. Contextual Image Retrieval
+### 2️⃣ Contextual Image Retrieval
 - Retrieves relevant photos based on the contextual understanding of queries, matching both text and image features.
 
-### 3. Detailed Image Descriptions
+### 3️⃣ Detailed Image Descriptions
 - Automatically generates textual descriptions of images, such as "This image shows a beach during sunset with two people walking."
 
-### 4. Visual Similarity Search
+### 4️⃣ Visual Similarity Search
 - Finds images similar to a selected one based on color, objects, and scene similarity.
 
-### 5. Automatic Tagging
+### 5️⃣ Automatic Tagging
 - AI tags photos with keywords like "plant," "cellphone," or "handbag" for easier searching and organization.
 
-### 6. Relevance Ranking
+### 6️⃣ Relevance Ranking
 - Retrieved images are ranked based on how closely they match the user’s query.
 
-### 7. Interactive Gallery
+### 7️⃣ Interactive Gallery
 - A user-friendly interface to browse, search, and interact with uploaded images.
 
 ---
 
 
-## Technology Stack
-### Backend:
+## 🛠  Technology Stack
+### 🔙 Backend:
 - **FastAPI** - For building the RESTful API.
 - **ChromaDB** - Vector database for storing image embeddings, descriptions, metadata(image height, image width, timestamp, image_format, color_palette etc.)
 - **CLIP** - Used for text and image embeddings and similarity search.
 - **Gemini API (2.0 Flash)** - For generating image descriptions.
 
-### Frontend:
+### 🎨 Frontend:
 - **HTML** - Used to structure the content on the web page
 - **CSS** - Used to style and design the layout of the web pages
 - **JavaScript** - To add interactivity and dynamic functionality to the web pages
 - **JQuery** - A JavaScript library that simplifies DOM manipulation, event handling, and AJAX interactions
   
-### AI Models:
+### 🤖 AI Models:
 - **Vision-based LLM/SLM** - For understanding and processing visual data.
 - **Multimodal Models** - For processing combined text and image inputs using late fusion.
 - **Retrieval-Augmented Generation (RAG)** - For generating responses based on retrieved image data.
 
 ---
 
-## System Workflow
+## 🔄 System Workflow
 1. **Query Processing**
    - User inputs a text query or an image query.
    - NLP module interprets the query and generates embeddings.
@@ -66,7 +66,7 @@ Conversational Memory Bot is an AI-powered chatbot designed to revolutionize the
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```text
 Conversational_memory_Bot_Final_Project/
@@ -114,10 +114,10 @@ Conversational_memory_Bot_Final_Project/
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ## Installation & Setup
-### Prerequisites
+### 📌 Prerequisites
 To run this project following are need to be installed :
 - Python 3.11
 - FastAPI
@@ -127,7 +127,7 @@ To run this project following are need to be installed :
   
 ---
 
-## To create a Gemini API Key
+## 🔑 To create a Gemini API Key
 To use the Gemini API for generating image descriptions, you need to create an API key from Google AI Studio.
 ### 1. Visit Google AI Studio API Key Page
 Go to https://aistudio.google.com/app/apikey.
@@ -142,7 +142,7 @@ Use the Google account you want to associate with the API usage.
 ### 4. Copy the Generated API Key
 - After creation, your new API key will be shown on the screen.
 - Click Copy to copy it to your clipboard.
-- Important: Keep your API key private and never share it publicly.
+⚠️ **Important:** Keep your API key private and never share it publicly.
 
 ### 5. Store the API Key in .env file
 - In your project root, open the .env file and add:
@@ -154,7 +154,7 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ---
 
-## Installation Steps:
+⚙ ## Installation Steps:
 1. Clone the repository:
    ```bash
    git clone <repository-url>
@@ -182,7 +182,7 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ---
 
-## **API Endpoints**
+## 🔗 **API Endpoints**
 ### 1. Home Page
 - **URL** : `/`
 - **Method** : `GET`
@@ -233,12 +233,12 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ---
 
-## Usage
+## 🎯 Usage
 - Upload images via the batch uploader.
 - Query the chatbot using natural language or images.
 - Retrieve, search, and explore personal as well as photo gallery effortlessly.
 
 ---
 
-## License
+## 📜 License
 This project is licensed under the MIT License.
