@@ -1,4 +1,5 @@
-en_dict = {
+en_dict = 
+{
     "attempt": "⚡ Attempt {attempt}: Generating response...",
     "error_attempt": "⚠️ Error (Attempt {attempt}): {error}",
     "description_failed": "❌ Description generation failed after retries.",
@@ -6,16 +7,20 @@ en_dict = {
     "caption_failed": "⚠️ Caption generation failed: {error}"
 }
 
-detect_dict = {
+detect_dict = 
+{
     "image_not": "Image not found or cannot be read."
 }
-store_dict = {
+store_dict = 
+{
     "image_store": "Successfully stored {image_path}",
     "error_storing": "Error storing image {image_path}: {error}",
     "retrieve_similar_images": "Retrieving similar images based on query...",
     "error_uploading": "Error uploading images: {error}"
 }
-view_dict = {
+
+view_dict =
+{
     "no_image_selected": "No image selected",
     "image_not_found": "Image not found",
     "error_processing_image": "Error processing image: {error}",
