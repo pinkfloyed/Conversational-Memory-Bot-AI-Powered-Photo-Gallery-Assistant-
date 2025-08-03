@@ -4,7 +4,6 @@ from fastapi.templating import Jinja2Templates
 
 router = APIRouter()
 
-# Initialize templates
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/chat", response_class=HTMLResponse)
