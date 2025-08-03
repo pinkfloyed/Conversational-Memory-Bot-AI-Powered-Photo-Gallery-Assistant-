@@ -2,10 +2,8 @@ import os, cv2, torch, chromadb, sys
 from pathlib import Path
 from config import CHROMA_DB_DIR
 
-
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Global client instance
 _chroma_client = None
 
 def get_chroma_client():
