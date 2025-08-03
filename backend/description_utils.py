@@ -5,10 +5,8 @@ from dotenv import load_dotenv
 import os
 from string_localisation import en_dict
 
-# Load environment variables
 load_dotenv()
 
-# Initialize Gemini
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=GOOGLE_API_KEY)
 gemini_model = genai.GenerativeModel("gemini-2.0-flash")
@@ -33,8 +31,6 @@ def generate_description_with_retry(image=None, prompt=None, retries=3, delay=2)
             time.sleep(delay)
             delay *= 2  # Exponential backoff
 
-    # print("❌ Description generation failed after retries.", flush=True)
-    # return "No response generated."
     print(en_dict["description_failed"], flush=True)
     return en_dict["no_response"]
 
@@ -47,8 +43,6 @@ def generate_caption(image_path):
     except Exception as e:
         print(en_dict["caption_failed"].format(error=e), flush=True)
         return "No description available."
-        # print(f"⚠️ Caption generation failed: {e}", flush=True)
-        # return "No description available."
 
 
 def generate_response(query, retrieved_images):
