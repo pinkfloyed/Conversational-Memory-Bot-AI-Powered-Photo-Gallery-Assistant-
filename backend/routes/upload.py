@@ -7,9 +7,10 @@ import os
 from config import UPLOAD_DIR
 from backend.store_retrieve import store_image
 from string_localisation import store_dict
+
 router = APIRouter()
 
-# Initialize templates
+
 templates = Jinja2Templates(directory="templates")
 
 @router.post("/batch_upload", tags=["Upload"])
@@ -30,7 +31,7 @@ async def upload_images(files: list[UploadFile] = File(...)):
         })
     except Exception as e:
         raise HTTPException(status_code=500, detail=store_dict["error_uploading"].format(error=str(e)))
-        # raise HTTPException(status_code=500, detail=f"Error uploading images: {str(e)}")
+
 
 @router.get("/batch_upload_page", response_class=HTMLResponse, tags=["Frontend"])
 async def batch_upload_page(request: Request):
