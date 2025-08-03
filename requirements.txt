@@ -6,6 +6,7 @@ requests
 jinja2
 aiofiles
 numpy
+pandas
 torch
 torchvision
 git+https://github.com/openai/CLIP.git
@@ -14,5 +15,5 @@ chromadb
 scikit-learn
 tensorflow==2.13
 opencv-python
-pandas
 python-dotenv
+
