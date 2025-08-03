@@ -6,7 +6,6 @@ from config import UPLOAD_DIR
 
 router = APIRouter()
 
-# Initialize templates
 templates = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
