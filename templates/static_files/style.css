@@ -4,34 +4,31 @@
     box-sizing: border-box;
 }
 
-/* Body Styles */
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensures the footer stays at the bottom */
+    min-height: 100vh; 
     font-family: 'Poppins', sans-serif;
     background-color: #f4f4f4;
     color: #333;
 }
 
-/* Main Section Styles */
 main {
-    flex: 1; /* Takes up all available space, pushing footer down */
+    flex: 1; 
     padding: 20px;
     text-align: center;
 }
 
-/* Footer Styles */
 footer {
     background-color: #2c3e50;
     color: white;
     text-align: center;
     padding: 20px 0;
-    margin-top: 40px; /* Adjust the distance from content */
+    margin-top: 40px; 
     width: 100%;
 }
 
-/* Navbar Styles */
+
 nav {
     background-color: #2c3e50;
     padding: 10px 0;
@@ -59,7 +56,7 @@ nav {
     color: #3498db;
 }
 
-/* Header Styles */
+
 header {
     background-color: #2c3e50;
     color: white;
@@ -79,11 +76,11 @@ header {
 }
 
 .hero .display-4 {
-    font-size: 3rem;  /* Adjust as needed */
+    font-size: 3rem;  
 }
 
 .hero .lead {
-    font-size: 1.5rem;  /* Adjust as needed */
+    font-size: 1.5rem;  
 }
 
 #homepage {
@@ -91,7 +88,7 @@ header {
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-/* Responsive Styles */
+
 @media (max-width: 768px) {
     .nav-list {
         flex-direction: column;
@@ -104,17 +101,17 @@ header {
 }
 .gallery {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 images per row */
-    gap: 10px; /* Space between images */
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 10px; 
     margin: 20px;
 }
 
 .image-container img {
-    width: 100%; /* Make image fill container */
-    max-width: 150px; /* Reduce image size */
+    width: 100%; 
+    max-width: 150px; 
     height: auto;
     border-radius: 10px;
-    object-fit: cover; /* Ensure the image maintains aspect ratio */
+    object-fit: cover; 
 }
 .result-card {
     display: inline-block;
@@ -124,12 +121,12 @@ header {
     border-radius: 8px;
     padding: 10px;
     background-color: #f9f9f9;
-    width: 200px; /* Fixed width for the card */
-    max-width: 100%; /* Ensure responsiveness */
+    width: 200px;
+    max-width: 100%; 
 }
 
 .result-card img {
-    width: 100%; /* Make image fill the container while maintaining aspect ratio */
+    width: 100%; 
     height: auto;
     border-radius: 5px;
 }
@@ -168,15 +165,14 @@ header {
 }
 
 
-/* Chat container to align messages properly */
 #chat-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* AI messages by default on left */
+    align-items: flex-start; 
     padding: 10px;
 }
 
-/* User query (Right Side) */
+
 .user-bubble {
     background-color: #0084ff;
     color: white;
@@ -189,7 +185,7 @@ header {
     word-wrap: break-word;
 }
 
- /*AI Response (Left Side) */
+
 .ai-bubble {
     background-color: #f1f1f1;
     text-align: left;
@@ -201,7 +197,7 @@ header {
     word-wrap: break-word;
 }
 
-/* Wrapper to align AI image responses */
+
 .image-container {
     display: flex;
     flex-direction: column;
@@ -214,14 +210,14 @@ header {
     max-width: 80%;
 }
 
-/* Image styling */
+
 .chat-image {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
-/* Description (caption) styling */
+
 .image-caption {
     font-size: 14px;
     color: #333;
@@ -346,3 +342,4 @@ form button:hover {
     margin-top: 20px;
     border-radius: 8px;
 }
+
