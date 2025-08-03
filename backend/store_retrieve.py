@@ -5,7 +5,6 @@ from backend.description_utils import generate_caption, generate_response
 import numpy as np, json, os
 from string_localisation import store_dict
 
-# Initialize database collection
 collection = get_collection()
 
 
@@ -18,12 +17,10 @@ def store_image(image_path):
         colors = extract_colors(image_path)  # Extract dominant colors
         metadata["color_palette"] = json.dumps(colors)
 
-        # Categorize image
         category = categorize_image(description)
         metadata["content_type"] = category
         metadata["description"] = description
 
-        # Store data in ChromaDB
         collection.add(
             documents=[description],
             metadatas=[metadata],
@@ -58,7 +55,6 @@ def retrieve_similar(query_text=None, query_image=None, w_text=0.3, w_image=0.7,
 
     print(store_dict["retrieve_similar_images"], flush=True)
 
-    # Perform the search using the query embedding
     results = collection.query(
         query_embeddings=[query_embedding],
         n_results=30,
@@ -69,27 +65,23 @@ def retrieve_similar(query_text=None, query_image=None, w_text=0.3, w_image=0.7,
     metadatas = results.get("metadatas", [])
     distances = results.get("distances", [[]])  # Get distance scores
 
-    # Find min and max distances
     if distances[0]:
         min_distance = min(distances[0])
         max_distance = max(distances[0])
 
         # Normalize distances to 0-1 range
-        normalized_distances = [(d - min_distance) / (max_distance - min_distance) if max_distance > min_distance else 0
-                                for d in distances[0]]
+        normalized_distances = [(d - min_distance) / (max_distance - min_distance) if max_distance > min_distance else 0 for d in distances[0]]
 
         if metadatas and len(metadatas) > 0 and len(distances) > 0:
             similarity_scores = [1 - d for d in normalized_distances]
 
             for i, (img_metadata, similarity) in enumerate(zip(metadatas[0], similarity_scores)):
-                # Only include results that meet the threshold
                 if similarity >= similarity_threshold:
                     file_name = img_metadata.get("file_name", "unknown.jpg")
                     image_url = f"/static/uploads/{file_name}"
                     description = img_metadata.get("description", "No description available")
                     content_type = img_metadata.get("content_type", "Unknown")
 
-                    # Append the result with image metadata and similarity score
                     retrieved_images.append({
                         "file_name": file_name,
                         "description": description,
