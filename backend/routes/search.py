@@ -3,7 +3,8 @@ from typing import Optional
 import os
 from config import HISTORY_DIR
 from backend.store_retrieve import retrieve_similar
-from backend.description_utils import generate_response ###
+from backend.description_utils import generate_response 
+
 router = APIRouter()
 
 @router.post("/search_combined")
@@ -15,7 +16,6 @@ async def search_combined(
     image_path = None
     retrieved_images = []
 
-    # Ensure the history directory exists
     if not os.path.exists(HISTORY_DIR):
         os.makedirs(HISTORY_DIR)
 
@@ -78,10 +78,8 @@ async def search_combined(
             # No input provided
             return {"error": "No query provided"}
 
-    # Generate the response based on the retrieved images
     response = generate_response(query_text, retrieved_images)
 
-    # Format results for frontend display
     result_images = [
         {
             "file_name": img["file_name"],
