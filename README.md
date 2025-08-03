@@ -63,8 +63,57 @@ Conversational Memory Bot is an AI-powered chatbot designed to revolutionize the
    - Generate contextual responses based on the combination of user query and retrieved images.
 4. **Output Display**
    - Results are shown in an interactive gallery with llm response, images with captions.
-   - 
+
 ---
+
+## Project Structure
+
+```text
+Conversational_memory_Bot_Final_Project/
+│── .venv/  # Virtual environment (hidden)
+│── backend/
+│   │── routes/
+│   │   │── __init__.py
+│   │   │── chat.py
+│   │   │── gallery.py
+│   │   │── search.py
+│   │   │── upload.py
+│   │   │── view.py
+│   │── __init__.py
+│   │── chroma_service.py
+│   │── clip_service.py
+│   │── description_utils.py
+│   │── detectobject_yolo.py
+│   │── image_utils.py
+│   │── models.py
+│   │── store_retrieve.py
+│── chromadb_dir/  # ChromaDB storage
+│── data/ 
+│   │── dataset/ (image dataset)
+│── static/
+│   │── history/ (in chat application, uploaded images saved here)
+│   │── outputs/ (detected objects output image saved here)
+│   │── uploads/ (uploaded images saved here)
+│── templates/
+│   │── static_files/
+│   │   │── logo.jpg
+│   │   │── in.png
+│   │   │── style.css
+│   │── batch_upload.html
+│   │── chat.html
+│   │── gallery.html
+│   │── image_view.html
+│   │── index.html
+│── .env  # environment variable for Gemini API key
+│── config.py  # Configuration settings
+│── main.py  # FastAPI entry point
+│── requirements.txt  # Dependencies
+│── yolov5x.pt  # YOLOv5 model weights
+│── string_localisation.py  # Constant string file
+```
+
+---
+
 ## Getting Started
 
 ## Installation & Setup
@@ -76,6 +125,33 @@ To run this project following are need to be installed :
 - CLIP
 - Gemini API access
   
+---
+
+## To create a Gemini API Key
+To use the Gemini API for generating image descriptions, you need to create an API key from Google AI Studio.
+### 1. Visit Google AI Studio API Key Page
+Go to https://aistudio.google.com/app/apikey.
+
+### 2. Sign in with your Google Account
+Use the Google account you want to associate with the API usage.
+
+### 3. Click "Create API key"
+- If prompted, select a project or create a new one.
+- Then click "Create API key".
+
+### 4. Copy the Generated API Key
+- After creation, your new API key will be shown on the screen.
+- Click Copy to copy it to your clipboard.
+- Important: Keep your API key private and never share it publicly.
+
+### 5. Store the API Key in .env file
+- In your project root, open the .env file and add:
+```bash
+GOOGLE_API_KEY=your_gemini_api_key_here
+```
+### 6. Save the file
+- Ensure .env is listed in .gitignore so the key isn’t uploaded to version control.
+
 ---
 
 ## Installation Steps:
@@ -166,49 +242,3 @@ To run this project following are need to be installed :
 
 ## License
 This project is licensed under the MIT License.
-
-
-## Project Structure
-
-```text
-Conversational_memory_Bot_Final_Project/
-│── .venv/  # Virtual environment (hidden)
-│── backend/
-│   │── routes/
-│   │   │── __init__.py
-│   │   │── chat.py
-│   │   │── gallery.py
-│   │   │── search.py
-│   │   │── upload.py
-│   │   │── view.py
-│   │── __init__.py
-│   │── chroma_service.py
-│   │── clip_service.py
-│   │── description_utils.py
-│   │── detectobject_yolo.py
-│   │── image_utils.py
-│   │── models.py
-│   │── store_retrieve.py
-│── chromadb_dir/  # ChromaDB storage
-│── data/ 
-│   │── dataset/ (image dataset)
-│── static/
-│   │── history/ (in chat application, uploaded images saved here)
-│   │── outputs/ (detected objects output image saved here)
-│   │── uploads/ (uploaded images saved here)
-│── templates/
-│   │── static_files/
-│   │   │── logo.jpg
-│   │   │── in.png
-│   │   │── style.css
-│   │── batch_upload.html
-│   │── chat.html
-│   │── gallery.html
-│   │── image_view.html
-│   │── index.html
-│── .env  # environment variable for Gemini API key
-│── config.py  # Configuration settings
-│── main.py  # FastAPI entry point
-│── requirements.txt  # Dependencies
-│── yolov5x.pt  # YOLOv5 model weights
-│── string_localisation.py  # Constant string file
