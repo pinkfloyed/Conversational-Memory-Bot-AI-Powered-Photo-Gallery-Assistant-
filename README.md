@@ -233,6 +233,82 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ---
 
+## 📸 ScreenShots 
+
+<img width="1366" height="647" alt="home1" src="https://github.com/user-attachments/assets/dcc815e6-05dc-4b6d-b827-2c3f40130563" />
+
+
+**Figue 1 : This displays the homepage of Conversational Memory Bot**
+
+
+<img width="1366" height="640" alt="upload" src="https://github.com/user-attachments/assets/e0736475-e3fe-4b94-86e9-2564b1a6234f" />
+
+
+**Figure  2 : User can upload single or batch upload images** 
+
+
+<img width="1366" height="646" alt="uploading" src="https://github.com/user-attachments/assets/be8dd8e9-b5e0-4111-908d-32a9f1d9c9a2" />
+
+
+**Figure  3 : Uploading images and storing metadata, description in ChromaDB**
+
+
+<img width="1366" height="631" alt="uploaded" src="https://github.com/user-attachments/assets/0d79efa6-528d-42a5-8422-8e805b102074" />
+
+
+**Figure  4 : After successful uploading images**
+
+
+![gall](https://github.com/user-attachments/assets/e88e1600-7caf-4386-a6d0-5b090dc60d2f)
+
+
+**Figure  5 : Displays the uploaded images in gallery page**
+
+
+<img width="1366" height="637" alt="view" src="https://github.com/user-attachments/assets/4acd90fa-ef12-4371-9b28-18220a2eb5a1" />
+
+
+**Figure  6 : Displays the image information in view page**
+
+
+<img width="1366" height="640" alt="viewall" src="https://github.com/user-attachments/assets/000ee011-fa65-4d2f-8fa2-ac63721c7e77" />
+
+
+**Figure  7 : Zoom in, zoom out of images and automatic tagging**
+
+
+![WhatsApp Image 2025-08-11 at 11 34 00 PM](https://github.com/user-attachments/assets/b7fd93a0-10a5-4fda-933c-b135a36778c8)
+
+
+**Figure  8 : Displays retrieved images for user text query**
+
+
+<img width="1366" height="651" alt="im" src="https://github.com/user-attachments/assets/77c6a9c4-9f07-4910-be69-917d471dc604" />
+
+
+
+**Figure  9 : User query for visual similarity search**
+
+
+<img width="1366" height="651" alt="imres" src="https://github.com/user-attachments/assets/9cfeee98-8cbc-4916-84e3-893ba57b5587" />
+
+
+**Figure  10 : Displays retrieved images for user text query**
+
+
+<img width="1366" height="644" alt="both" src="https://github.com/user-attachments/assets/79b5b211-046d-440c-bee0-4020868ec45c" />
+
+
+**Figure  11 : User query for both text and images**
+
+
+<img width="1366" height="643" alt="bothres" src="https://github.com/user-attachments/assets/2ffc2ed4-91bf-4766-87e1-6ddc19d0576f" />
+
+
+**Figure  12 : Displays retrieved images for user text and image query**
+
+---
+
 ## 🎯 Usage
 - Upload images via the batch uploader.
 - Query the chatbot using natural language or images.
